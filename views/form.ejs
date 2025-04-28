@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Housewife Tasks Form</title>
+</head>
+<body>
+    <h1>Housewife Task Form</h1>
+    <form action="/submit" method="POST">
+        <label>Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Choose the tasks you do at home:</label><br>
+        <input type="checkbox" name="tasks" value="Cooking"> Cooking <br>
+        <input type="checkbox" name="tasks" value="Cleaning"> Cleaning <br>
+        <input type="checkbox" name="tasks" value="Laundry"> Laundry <br>
+        <input type="checkbox" name="tasks" value="Grocery Shopping"> Grocery Shopping <br>
+        <input type="checkbox" name="tasks" value="Child Care"> Child Care <br>
+        <input type="checkbox" name="tasks" value="Other"> Other <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
