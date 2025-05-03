@@ -2,15 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submission Result</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h3 {
+            font-size: 18px;
+            color: #444;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        li {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .task-amount {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .task-list {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Thank You, <%= name %>!</h1>
-    <h3>Your submitted tasks are:</h3>
-    <ul>
-        <% tasks.forEach(function(task) { %>
-            <li><%= task %></li>
-        <% }); %>
-    </ul>
+    <div class="container">
+        <h1>Thank You, <%= name %>!</h1>
+        <h3>Your submitted tasks and their respective costs are:</h3>
+        <div class="task-list">
+            <ul>
+                <% tasks.forEach(function(task) { %>
+                    <li>
+                        <span class="task-name"><%= task.name %></span>
+                        <span class="task-amount"><%= task.amount %> INR</span>
+                    </li>
+                <% }); %>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

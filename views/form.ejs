@@ -2,26 +2,165 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Housewife Tasks Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><h2>Housewife Tasks Form</h2></title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .task-list {
+            margin-bottom: 20px;
+        }
+
+        .task-list input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .task-list label {
+            display: inline-block;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .task-details {
+            margin-left: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .task-details span {
+            font-weight: bold;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h1>Housewife Task Form</h1>
-    <form action="/submit" method="POST">
-        <label>Name:</label><br>
-        <input type="text" name="name" required><br><br>
+    <div class="container">
+        <h1>Housewife Task Form</h1>
+        <form action="/submit" method="POST">
+            <label for="name">Name:</label><br>
+            <input type="text" name="name" required><br><br>
 
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+            <label for="email">Email:</label><br>
+            <input type="email" name="email" required><br><br>
 
-        <label>Choose the tasks you do at home:</label><br>
-        <input type="checkbox" name="tasks" value="Cooking"> Cooking <br>
-        <input type="checkbox" name="tasks" value="Cleaning"> Cleaning <br>
-        <input type="checkbox" name="tasks" value="Laundry"> Laundry <br>
-        <input type="checkbox" name="tasks" value="Grocery Shopping"> Grocery Shopping <br>
-        <input type="checkbox" name="tasks" value="Child Care"> Child Care <br>
-        <input type="checkbox" name="tasks" value="Other"> Other <br><br>
+            <label>Choose the tasks you do at home:</label><br>
+            <div class="task-list">
+                <input type="checkbox" name="tasks" value="Cooking" id="cooking">
+                <label for="cooking">Cooking</label>
+                <div class="task-details">
+                    <span>Cost (INR): </span>5000 <br>
+                    <span>Unit/Notes: </span>Per person (i.e., 20,000 total)
+                </div>
+                <br>
 
-        <button type="submit">Submit</button>
-    </form>
+                <input type="checkbox" name="tasks" value="Cleaning" id="cleaning">
+                <label for="cleaning">House Cleaning</label>
+                <div class="task-details">
+                    <span>Cost (INR): </span>2000 <br>
+                    <span>Unit/Notes: </span>Monthly
+                </div>
+                <br>
+
+                <input type="checkbox" name="tasks" value="Childcare (0-5 yrs)" id="childcare1">
+                <label for="childcare1">Childcare (0-5 yrs)</label>
+                <div class="task-details">
+                    <span>Cost (INR): </span>15000 <br>
+                    <span>Unit/Notes: </span>Per child
+                </div>
+                <br>
+
+                <input type="checkbox" name="tasks" value="Childcare (6-13 yrs)" id="childcare2">
+                <label for="childcare2">Childcare (6-13 yrs)</label>
+                <div class="task-details">
+                    <span>Cost (INR): </span>20000 <br>
+                    <span>Unit/Notes: </span>Per child
+                </div>
+                <br>
+
+                <input type="checkbox" name="tasks" value="Laundry & Ironing" id="laundry">
+                <label for="laundry">Laundry & Ironing</label>
+                <div class="task-details">
+                    <span>Cost (INR): </span>800 <br>
+                    <span>Unit/Notes: </span>Per person (i.e., 3,200 total)
+                </div>
+                <br>
+
+                <input type="checkbox" name="tasks" value="Elderly Care (GENERAL)" id="elderly1">
+                <label for="elderly1">Elderly Care (GENERAL)</label>
+                <div class="task-details">
+                    <span>Cost (INR): </span>15000 <br>
+                    <span>Unit/Notes: </span>Per person
+                </div>
+                <br>
+
+                <input type="checkbox" name="tasks" value="Security" id="security">
+                <label for="security">Security</label>
+                <div class="task-details">
+                    <span>Cost (INR): </span>8000 <br>
+                    <span>Unit/Notes: </span>Monthly
+                </div>
+                <br>
+            </div>
+
+            <div class="button-container">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
