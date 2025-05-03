@@ -128,5 +128,32 @@ li:hover {
             It does not cover special cases like medical needs, special care, or unique family situations.		
             The goal is to highlight the value of unpaid work, not to act as a bill or formal estimate.</p>
     </div>
+    <script>
+        window.onload = function() {
+            // Get the selected tasks from localStorage
+            const selectedTasks = JSON.parse(localStorage.getItem('selectedTasks'));
+    
+            if (selectedTasks && selectedTasks.length > 0) {
+                let totalCost = 0;
+                const taskList = document.getElementById('taskList');
+    
+                // Display each task and its cost
+                selectedTasks.forEach(function(task) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span class="task-name">${task.name}</span> - ₹<span class="task-amount">${task.amount}</span>`;
+                    taskList.appendChild(li);
+    
+                    // Add the cost to total cost
+                    totalCost += task.amount;
+                });
+    
+                // Display total cost
+                document.getElementById('totalCost').innerText = totalCost;
+            } else {
+                document.getElementById('taskList').innerHTML = '<li>No tasks selected.</li>';
+            }
+        }
+    </script>
+
 </body>
 </html>
