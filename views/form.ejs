@@ -132,8 +132,8 @@
     <div class="container">
         <h1>Housewife Task Form</h1>
         <div class="photo-container">
-            <img src="photo.jpg" alt="Photo">
-        </div><br>
+    <img src="https://raw.githubusercontent.com/TheNineOne/Housewifetasks_project/main/views/photo.jpg" alt="Photo">
+    </div><br>
         <form action="/submit" method="POST">
             <label for="name">Enter Your Name:</label><br><br>
             <input type="text" name="name" required><br><br>            
@@ -220,7 +220,7 @@
         localStorage.setItem('selectedTasks', JSON.stringify(selectedTasks));
   
         // Redirect to second page
-        window.location.href = 'result.html';
+        window.location.href = '/result';
       }
     </script>
 </body>
