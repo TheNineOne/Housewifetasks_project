@@ -2,99 +2,134 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submission Result</title>
     <style>
         body {
-            background-color: #FFE5B4;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 50px;
-        }
-        .congratulations-message {
-            color: #4CAF50;
-            font-size: 2.5rem;
-            text-shadow: none; /* Removed shadow for a clean look */
-            margin: 0;
-            font-weight: 600;
-            position: absolute;
-            top: 20px; /* Adjust position */
-        }
-
-        .container {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
-            width: 500px;
-            text-align: center;
-        }
-
-        h1 {
-            color: #4CAF50;
-            margin-bottom: 20px;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-            text-align: left;
-        }
-
-        li {
-            background-color: #f9f9f9;
-            border-radius: 6px; /* Light rounded corners */
-            padding: 10px 15px;
-            margin: 12px 0;
-            font-size: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
-        }
-
-        li:hover {
-            transform: translateY(-3px); /* Slight lift effect on hover */
-            background-color: #f0f0f0; /* Light background on hover */
+    background-color: #FFE5B4; /* Soft peach background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
 }
 
-        .total {
-            font-size: 1.4em;
-            margin-top: 20px;
-            color: #000;
-        }
+.congratulations-message {
+    color: #4CAF50;
+    font-size: 2.5rem;
+    text-shadow: none; /* Removed shadow for a clean look */
+    margin: 0;
+    font-weight: 600;
+    position: absolute;
+    top: 20px; /* Adjust position */
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 10px; /* Slightly rounded edges */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle, light shadow */
+    padding: 30px;
+    width: 100%;
+    max-width: 500px; /* Limit width to avoid being too wide */
+    text-align: center;
+}
+
+h3 {
+    font-size: 18px;
+    color: #444;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: #f9f9f9;
+    border-radius: 6px; /* Light rounded corners */
+    padding: 10px 15px;
+    margin: 12px 0;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+li:hover {
+    transform: translateY(-3px); /* Slight lift effect on hover */
+    background-color: #f0f0f0; /* Light background on hover */
+}
+
+.task-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.task-amount {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+       
     </style>
 </head>
 <body>
-    <div class="congratulations-message">🎉 Congratulations! 🎉</div>    
-    <div class="container">
+    <div class="congratulations-message">🎉 Congratulations! 🎉</div>    <div class="container">
         <h1>Thank You, <%= name %>!</h1>
         <h3>Your submitted tasks and their respective costs are:</h3>
-        <% if (selectedTasks.length === 0) { %>
-            <p>No tasks were selected.</p>
-        <% } else { %>
+        <div class="task-list">
             <ul>
-                <% selectedTasks.forEach((amount, index) => { %>
+                <% tasks.forEach(function(task) { %>
                     <li>
-                        Task <%= index + 1 %>
-                        <span><%= amount %> INR</span>
+                        <span class="task-name"><%= task.name %></span>
+                        <span class="task-amount"><%= task.amount %> INR</span>
+                        <h3>Total Cost: ₹<span id="totalCost">0</span></h3>
                     </li>
-                <% }) %>
+                <% }); %>
             </ul>
-            <div class="total">Total Cost: ₹ <%= totalCost %></div>
-        <% } %>
+        </div>
+        <br><p style="color: #333; font-size: 18px; line-height: 1.6;">Disclaimer:<br>		
+            The costs mentioned in this document are rough estimates based on average market rates for domestic services.		
+            They are meant to show the economic value of unpaid household work, especially by housewives, and are based on a standard 4 person family.		
+            <br>        
+            Please note:<br>		
+            Actual costs may vary depending on location, service quality, and personal agreements.		
+            This document is for awareness and advocacy only, not for legal, financial, or official use.		
+            It does not cover special cases like medical needs, special care, or unique family situations.		
+            The goal is to highlight the value of unpaid work, not to act as a bill or formal estimate.</p>
     </div>
-    <br><p style="color: #333; font-size: 18px; line-height: 1.6;">Disclaimer:<br>		
-        The costs mentioned in this document are rough estimates based on average market rates for domestic services.		
-        They are meant to show the economic value of unpaid household work, especially by housewives, and are based on a standard 4 person family.		
-        <br>        
-        Please note:<br>		
-        Actual costs may vary depending on location, service quality, and personal agreements.		
-        This document is for awareness and advocacy only, not for legal, financial, or official use.		
-        It does not cover special cases like medical needs, special care, or unique family situations.		
-        The goal is to highlight the value of unpaid work, not to act as a bill or formal estimate.</p>
+
+    <script>
+        window.onload = function() {
+            // Get the selected tasks from localStorage
+            const selectedTasks = JSON.parse(localStorage.getItem('selectedTasks'));
+    
+            if (selectedTasks && selectedTasks.length > 0) {
+                let totalCost = 0;
+                const taskList = document.getElementById('taskList');
+    
+                // Display each task and its cost
+                selectedTasks.forEach(function(task) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span class="task-name">${task.name}</span> - ₹<span class="task-amount">${task.amount}</span>`;
+                    taskList.appendChild(li);
+    
+                    // Add the cost to total cost
+                    totalCost += task.amount;
+                });
+    
+                // Display total cost
+                document.getElementById('totalCost').innerText = totalCost;
+            } else {
+                document.getElementById('taskList').innerHTML = '<li>No tasks selected.</li>';
+            }
+        }
+    </script>
 </body>
 </html>
