@@ -99,6 +99,25 @@ li:hover {
                 <% }); %>
             </ul>
         </div>
+
+    <div class="container">
+        <h1>Thank You, <%= name %>!</h1>
+        <h3>Your submitted tasks and their respective costs are:</h3>
+        <% if (selectedTasks.length === 0) { %>
+            <p>No tasks were selected.</p>
+        <% } else { %>
+            <ul>
+                <% selectedTasks.forEach((amount, index) => { %>
+                    <li>
+                        Task <%= index + 1 %>
+                        <span><%= amount %> INR</span>
+                    </li>
+                <% }) %>
+            </ul>
+            <div class="total">Total Cost: ₹ <%= totalCost %></div>
+        <% } %>
+    </div>
+
         <br><p style="color: #333; font-size: 18px; line-height: 1.6;">Disclaimer:<br>		
             The costs mentioned in this document are rough estimates based on average market rates for domestic services.		
             They are meant to show the economic value of unpaid household work, especially by housewives, and are based on a standard 4 person family.		
@@ -109,32 +128,5 @@ li:hover {
             It does not cover special cases like medical needs, special care, or unique family situations.		
             The goal is to highlight the value of unpaid work, not to act as a bill or formal estimate.</p>
     </div>
-
-    <script>
-        window.onload = function() {
-            // Get the selected tasks from localStorage
-            const selectedTasks = JSON.parse(localStorage.getItem('selectedTasks'));
-    
-            if (selectedTasks && selectedTasks.length > 0) {
-                let totalCost = 0;
-                const taskList = document.getElementById('taskList');
-    
-                // Display each task and its cost
-                selectedTasks.forEach(function(task) {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<span class="task-name">${task.name}</span> - ₹<span class="task-amount">${task.amount}</span>`;
-                    taskList.appendChild(li);
-    
-                    // Add the cost to total cost
-                    totalCost += task.amount;
-                });
-    
-                // Display total cost
-                document.getElementById('totalCost').innerText = totalCost;
-            } else {
-                document.getElementById('taskList').innerHTML = '<li>No tasks selected.</li>';
-            }
-        }
-    </script>
 </body>
 </html>
