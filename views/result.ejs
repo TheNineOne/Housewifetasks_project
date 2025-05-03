@@ -6,68 +6,81 @@
     <title>Submission Result</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7fc;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+    background-color: #FFE5B4; /* Soft peach background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+}
 
-        .container {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 500px;
-            text-align: center;
-        }
+.congratulations-message {
+    color: #4CAF50;
+    font-size: 2.5rem;
+    text-shadow: none; /* Removed shadow for a clean look */
+    margin: 0;
+    font-weight: 600;
+    position: absolute;
+    top: 20px; /* Adjust position */
+}
 
-        h1 {
-            color: #333;
-        }
+.container {
+    background-color: #ffffff;
+    border-radius: 10px; /* Slightly rounded edges */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle, light shadow */
+    padding: 30px;
+    width: 100%;
+    max-width: 500px; /* Limit width to avoid being too wide */
+    text-align: center;
+}
 
-        h3 {
-            font-size: 18px;
-            color: #444;
-        }
+h3 {
+    font-size: 18px;
+    color: #444;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-            text-align: left;
-        }
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
-        li {
-            background-color: #f1f1f1;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+li {
+    background-color: #f9f9f9;
+    border-radius: 6px; /* Light rounded corners */
+    padding: 10px 15px;
+    margin: 12px 0;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
 
-        .task-name {
-            font-weight: bold;
-            color: #333;
-        }
+li:hover {
+    transform: translateY(-3px); /* Slight lift effect on hover */
+    background-color: #f0f0f0; /* Light background on hover */
+}
 
-        .task-amount {
-            font-weight: bold;
-            color: #4CAF50;
-        }
+.task-name {
+    font-weight: bold;
+    color: #333;
+}
 
-        .task-list {
-            margin-top: 20px;
-        }
+.task-amount {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+       
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="congratulations-message">🎉 Congratulations! 🎉</div>    <div class="container">
         <h1>Thank You, <%= name %>!</h1>
         <h3>Your submitted tasks and their respective costs are:</h3>
         <div class="task-list">
@@ -76,19 +89,47 @@
                     <li>
                         <span class="task-name"><%= task.name %></span>
                         <span class="task-amount"><%= task.amount %> INR</span>
+                        <h3>Total Cost: ₹<span id="totalCost">0</span></h3>
                     </li>
                 <% }); %>
             </ul>
         </div>
-        <h3>Disclaimer:		
+        <br><p style="color: #333; font-size: 18px; line-height: 1.6;">Disclaimer:<br>		
             The costs mentioned in this document are rough estimates based on average market rates for domestic services.		
             They are meant to show the economic value of unpaid household work, especially by housewives, and are based on a standard 4 person family.		
-                    
-            Please note:		
+            <br>        
+            Please note:<br>		
             Actual costs may vary depending on location, service quality, and personal agreements.		
             This document is for awareness and advocacy only, not for legal, financial, or official use.		
             It does not cover special cases like medical needs, special care, or unique family situations.		
-            The goal is to highlight the value of unpaid work, not to act as a bill or formal estimate.</h3>
+            The goal is to highlight the value of unpaid work, not to act as a bill or formal estimate.</p>
     </div>
+
+    <script>
+        window.onload = function() {
+            // Get the selected tasks from localStorage
+            const selectedTasks = JSON.parse(localStorage.getItem('selectedTasks'));
+    
+            if (selectedTasks && selectedTasks.length > 0) {
+                let totalCost = 0;
+                const taskList = document.getElementById('taskList');
+    
+                // Display each task and its cost
+                selectedTasks.forEach(function(task) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span class="task-name">${task.name}</span> - ₹<span class="task-amount">${task.amount}</span>`;
+                    taskList.appendChild(li);
+    
+                    // Add the cost to total cost
+                    totalCost += task.amount;
+                });
+    
+                // Display total cost
+                document.getElementById('totalCost').innerText = totalCost;
+            } else {
+                document.getElementById('taskList').innerHTML = '<li>No tasks selected.</li>';
+            }
+        }
+    </script>
 </body>
 </html>
