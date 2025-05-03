@@ -99,25 +99,6 @@ li:hover {
                 <% }); %>
             </ul>
         </div>
-
-    <div class="containerr">
-        <h1>Thank You, <%= name %>!</h1>
-        <h3>Your submitted tasks and their respective costs are:</h3>
-        <% if (selectedTasks.length === 0) { %>
-            <p>No tasks were selected.</p>
-        <% } else { %>
-            <ul>
-                <% selectedTasks.forEach((amount, index) => { %>
-                    <li>
-                        Task <%= index + 1 %>
-                        <span><%= amount %> INR</span>
-                    </li>
-                <% }) %>
-            </ul>
-            <div class="total">Total Cost: ₹ <%= totalCost %></div>
-        <% } %>
-    </div>
-
         <br><p style="color: #333; font-size: 18px; line-height: 1.6;">Disclaimer:<br>		
             The costs mentioned in this document are rough estimates based on average market rates for domestic services.		
             They are meant to show the economic value of unpaid household work, especially by housewives, and are based on a standard 4 person family.		
@@ -128,6 +109,7 @@ li:hover {
             It does not cover special cases like medical needs, special care, or unique family situations.		
             The goal is to highlight the value of unpaid work, not to act as a bill or formal estimate.</p>
     </div>
+
     <script>
         window.onload = function() {
             // Get the selected tasks from localStorage
@@ -154,6 +136,5 @@ li:hover {
             }
         }
     </script>
-
 </body>
 </html>
