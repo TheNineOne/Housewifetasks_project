@@ -5,6 +5,31 @@ require('dotenv').config();
 
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Set up EJS as the view engine
+app.set('view engine', 'ejs');
+
+// Your route for rendering the result page
+app.post('/result', (req, res) => {
+    let selectedTasks = req.body.tasks || [];
+    
+    // If no tasks were selected, send back an empty result
+    if (selectedTasks.length === 0) {
+        return res.render('result', { selectedTasks: [], totalCost: 0 });
+    }
+
+    // Convert selected task values to integers
+    selectedTasks = selectedTasks.map(task => parseInt(task));
+
+    // Calculate the total cost
+    let totalCost = selectedTasks.reduce((sum, task) => sum + task, 0);
+
+    // Render the result page with the selected tasks and total cost
+    res.render('result', { selectedTasks, totalCost });
+});
+
+
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
