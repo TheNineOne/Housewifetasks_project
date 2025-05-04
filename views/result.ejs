@@ -87,7 +87,20 @@ li:hover {
     <div class="congratulations-message">🎉 Congratulations! 🎉</div><br>    
     <div class="container"><br>
         <h1>Thank You, <%= name %>!</h1>
-        <h3>Your submitted tasks and their respective costs are:</h3>
+        <h3>Based on the amazing work you do at home, your estimated market value is per month</h3>
+        <h3>Based on the amazing work you do at home, your estimated market value is:</h3>
+        <p>₹<%= totalCost %> per month</p>
+
+<ul id="taskList">
+  <% tasks.forEach(function(task) { %>
+    <li>
+      <span class="task-name"><%= task.name %></span> - ₹<span class="task-amount"><%= task.amount %></span>
+    </li>
+  <% }); %>
+</ul>
+
+<h3>Total Cost: ₹<%= totalCost %></h3>
+
         <div class="task-list">
             <ul>
                 <% tasks.forEach(function(task) { %>
