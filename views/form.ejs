@@ -150,64 +150,36 @@
             <div class="task-list">
               <input type="checkbox" name="tasks" value="5000" data-task="Cooking" id="cooking">
               <label for="cooking">Cooking</label>
-              <div class="task-details">
-                  <span>Cost (INR): </span>5000 <br>
-                  <span>Unit/Notes: </span>Per person (i.e., 20,000 total)
-              </div>
               <br>
           
               <input type="checkbox" name="tasks" value="2000" data-task="House Cleaning" id="cleaning">
               <label for="cleaning">House Cleaning</label>
-              <div class="task-details">
-                  <span>Cost (INR): </span>2000 <br>
-                  <span>Unit/Notes: </span>Monthly
-              </div>
               <br>
           
               <input type="checkbox" name="tasks" value="15000" data-task="Childcare (0-5 yrs)" id="childcare1">
               <label for="childcare1">Childcare (0-5 yrs)</label>
-              <div class="task-details">
-                  <span>Cost (INR): </span>15000 <br>
-                  <span>Unit/Notes: </span>Per child
-              </div>
               <br>
           
               <input type="checkbox" name="tasks" value="20000" data-task="Childcare (6-13 yrs)" id="childcare2">
               <label for="childcare2">Childcare (6-13 yrs)</label>
-              <div class="task-details">
-                  <span>Cost (INR): </span>20000 <br>
-                  <span>Unit/Notes: </span>Per child
-              </div>
               <br>
           
               <input type="checkbox" name="tasks" value="800" data-task="Laundry & Ironing" id="laundry">
               <label for="laundry">Laundry & Ironing</label>
-              <div class="task-details">
-                  <span>Cost (INR): </span>800 <br>
-                  <span>Unit/Notes: </span>Per person (i.e., 3,200 total)
-              </div>
               <br>
           
               <input type="checkbox" name="tasks" value="15000" data-task="Elderly Care (GENERAL)" id="elderly1">
               <label for="elderly1">Elderly Care (GENERAL)</label>
-              <div class="task-details">
-                  <span>Cost (INR): </span>15000 <br>
-                  <span>Unit/Notes: </span>Per person
-              </div>
               <br>
           
               <input type="checkbox" name="tasks" value="8000" data-task="Security" id="security">
               <label for="security">Security</label>
-              <div class="task-details">
-                  <span>Cost (INR): </span>8000 <br>
-                  <span>Unit/Notes: </span>Monthly
-              </div>
               <br>
 
             <div class="button-container">
                 <button type="submit" onclick="saveSelectedTasks()">Submit</button><br><br>
             </div>
-            <div class = "disclaimer"><p>‼️Disclaimer‼️<br>		
+            <div class = "disclaimer"><p>        ‼️Disclaimer‼️<br>		
 The costs mentioned in this document are rough estimates based on average market rates for domestic services.		
 They are meant to show the economic value of unpaid household work, especially by housewives, and are based on a standard 4 person family.</p><br>
             </div>
@@ -216,22 +188,23 @@ They are meant to show the economic value of unpaid household work, especially b
 
     <script>
       function saveSelectedTasks() {
-        const selectedTasks = [];
-        const checkboxes = document.querySelectorAll('input[name="task"]:checked');
-  
-        checkboxes.forEach(function(checkbox) {
-          selectedTasks.push({
-            name: checkbox.getAttribute('data-task'),
-            amount: parseInt(checkbox.value)
-          });
-        });
-  
-        // Save selected tasks in localStorage
-        localStorage.setItem('selectedTasks', JSON.stringify(selectedTasks));
-  
-        // Redirect to second page
-        window.location.href = '/result';
-      }
+  const selectedTasks = [];
+  const checkboxes = document.querySelectorAll('input[name="tasks"]:checked'); // corrected 'tasks'
+
+  checkboxes.forEach(function(checkbox) {
+    selectedTasks.push({
+      name: checkbox.getAttribute('data-task'),
+      amount: parseInt(checkbox.value)
+    });
+  });
+
+  // Save selected tasks in localStorage
+  localStorage.setItem('selectedTasks', JSON.stringify(selectedTasks));
+
+  // Redirect to second page
+  window.location.href = '/result';
+}
+
     </script>
 </body>
 </html>
