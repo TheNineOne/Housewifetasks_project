@@ -46,40 +46,6 @@ h3 {
     font-weight: normal;
     margin-bottom: 20px;
 }
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-li {
-    background-color: #f9f9f9;
-    border-radius: 6px; /* Light rounded corners */
-    padding: 10px 15px;
-    margin: 12px 0;
-    font-size: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
-}
-
-li:hover {
-    transform: translateY(-3px); /* Slight lift effect on hover */
-    background-color: #f0f0f0; /* Light background on hover */
-}
-
-.task-name {
-    font-weight: bold;
-    color: #333;
-}
-
-.task-amount {
-    color: #4CAF50;
-    font-weight: bold;
-}
-
        
     </style>
 </head>
@@ -88,21 +54,8 @@ li:hover {
     <div class="container"><br>
         <h1>Thank You, <%= name %>!</h1>
         <h3>Based on the amazing work you do at home, your estimated market value is per month</h3>
-        <h3>Based on the amazing work you do at home, your estimated market value is:</h3>
-        <p>₹<%= totalCost %> per month</p>
-        <h3>Total Cost: ₹<%= totalCost %></h3>
+        <h3>Total Cost: ₹<span id="totalCost">0</span></h3>
 
-        <div class="task-list">
-            <ul>
-                <% tasks.forEach(function(task) { %>
-                    <li>
-                        <span class="task-name"><%= task.name %></span>
-                        <span class="task-amount"><%= task.amount %> INR</span>
-                        <h3>Total Cost: ₹<span id="totalCost">0</span></h3>
-                    </li>
-                <% }); %>
-            </ul>
-        </div>
         <br><p style="color: #333; font-size: 18px; line-height: 1.6;">
             Please note:<br>		
             Actual costs may vary depending on location, service quality, and personal agreements.		
@@ -110,32 +63,5 @@ li:hover {
             It does not cover special cases like medical needs, special care, or unique family situations.		
             The goal is to highlight the value of unpaid work, not to act as a bill or formal estimate.</p>
     </div>
-
-    <script>
-        window.onload = function() {
-            // Get the selected tasks from localStorage
-            const selectedTasks = JSON.parse(localStorage.getItem('selectedTasks'));
-    
-            if (selectedTasks && selectedTasks.length > 0) {
-                let totalCost = 0;
-                const taskList = document.getElementById('taskList');
-    
-                // Display each task and its cost
-                selectedTasks.forEach(function(task) {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<span class="task-name">${task.name}</span> - ₹<span class="task-amount">${task.amount}</span>`;
-                    taskList.appendChild(li);
-    
-                    // Add the cost to total cost
-                    totalCost += task.amount;
-                });
-    
-                // Display total cost
-                document.getElementById('totalCost').innerText = totalCost;
-            } else {
-                document.getElementById('taskList').innerHTML = '<li>No tasks selected.</li>';
-            }
-        }
-    </script>
 </body>
 </html>
