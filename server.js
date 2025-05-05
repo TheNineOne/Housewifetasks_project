@@ -5,84 +5,70 @@ require('dotenv').config();
 
 const app = express();
 
+// Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Set up EJS as the view engine
+app.use(express.static('public')); // For future CSS/JS support
 app.set('view engine', 'ejs');
 
-// Your route for rendering the result page
-app.post('/result', (req, res) => {
-    let selectedTasks = req.body.tasks || [];
-    
-    // If no tasks were selected, send back an empty result
-    if (selectedTasks.length === 0) {
-        return res.render('result', { selectedTasks: [], totalCost: 0 });
-    }
-
-    // Convert selected task values to integers
-    selectedTasks = selectedTasks.map(task => parseInt(task));
-
-    // Calculate the total cost
-    let totalCost = selectedTasks.reduce((sum, task) => sum + task, 0);
-
-    // Render the result page with the selected tasks and total cost
-    res.render('result', { selectedTasks, totalCost });
-});
-
-
-// Middlewares
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
-app.use(express.static('public'));  // Agar future me CSS/JS add karoge
-
-// MongoDB connection
+// MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
-    console.log('MongoDB Connected');
+    console.log('✅ MongoDB Connected');
 }).catch(err => {
-    console.error('MongoDB Connection Error:', err);
+    console.error('❌ MongoDB Connection Error:', err);
 });
 
-// Schema
+// Schema & Model
 const taskSchema = new mongoose.Schema({
     name: String,
     email: String,
     selectedTasks: [String]
 });
-
 const Task = mongoose.model('Task', taskSchema);
 
 // Routes
 
-// Form Display
+// Home - Show form
 app.get('/', (req, res) => {
     res.render('form');
 });
 
-// Form Submit
+// Form Submit - Save to DB and Show Result
 app.post('/submit', (req, res) => {
     const { name, email, tasks } = req.body;
-    
+
+    // Handle case where no tasks are selected
+    const selected = Array.isArray(tasks) ? tasks : (tasks ? [tasks] : []);
+
     const newTask = new Task({
         name,
         email,
-        selectedTasks: Array.isArray(tasks) ? tasks : [tasks]
+        selectedTasks: selected
     });
 
     newTask.save()
         .then(() => {
-            res.render('result', { name, tasks: Array.isArray(tasks) ? tasks : [tasks] });
+            // Convert task values to integers (if numeric) to calculate cost
+            const numericTasks = selected.map(task => parseInt(task)).filter(n => !isNaN(n));
+            const totalCost = numericTasks.reduce((sum, t) => sum + t, 0);
+
+            res.render('result', {
+                name,
+                email,
+                selectedTasks: selected,
+                totalCost
+            });
         })
         .catch(err => {
-            console.error('Error saving to database:', err);
-            res.send('Error saving data');
+            console.error('❌ Error saving to DB:', err);
+            res.status(500).send('❌ Server Error');
         });
 });
 
-// Server Start
+// Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
