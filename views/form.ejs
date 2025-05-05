@@ -188,22 +188,30 @@ They are meant to show the economic value of unpaid household work, especially b
 
     <script>
       function saveSelectedTasks() {
-  const selectedTasks = [];
-  const checkboxes = document.querySelectorAll('input[name="tasks"]:checked'); // corrected 'tasks'
+    const selectedTasks = [];
+    const checkboxes = document.querySelectorAll('input[name="tasks"]:checked');
 
-  checkboxes.forEach(function(checkbox) {
-    selectedTasks.push({
-      name: checkbox.getAttribute('data-task'),
-      amount: parseInt(checkbox.value)
+    checkboxes.forEach(function(checkbox) {
+        selectedTasks.push({
+            name: checkbox.getAttribute('data-task'),
+            amount: parseInt(checkbox.value)
+        });
     });
-  });
 
-  // Save selected tasks in localStorage
-  localStorage.setItem('selectedTasks', JSON.stringify(selectedTasks));
+    // Calculate the total cost on the client-side
+    const totalCost = selectedTasks.reduce((sum, task) => sum + task.amount, 0);
 
-  // Redirect to second page
-  window.location.href = '/result';
+    // Optionally, display the total cost on the page or in a hidden field
+    console.log("Total Cost: " + totalCost); // Just logs to console, can be displayed on page
+
+    // Save selected tasks in localStorage
+    localStorage.setItem('selectedTasks', JSON.stringify(selectedTasks));
+    localStorage.setItem('totalCost', totalCost); // Save total cost to localStorage if needed
+
+    // Redirect to second page
+    window.location.href = '/result';
 }
+
 
     </script>
 </body>
